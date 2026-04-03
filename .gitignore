@@ -1,0 +1,10 @@
+output/
+build/
+*.img
+*.tar
+*.gz
+*.xz
+*.o
+*.a
+*.so
+*.log

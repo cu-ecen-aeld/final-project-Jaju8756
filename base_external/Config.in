@@ -1,0 +1,5 @@
+menu "Final Project TicTacToe"
+
+#source "$BR2_EXTERNAL_FINALPROJECT_PATH/package/*/Config.in"
+
+endmenu
