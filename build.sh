@@ -1,5 +1,6 @@
 #!/bin/bash
-# Build script for BBB Buildroot project
+# Build script for RPi Buildroot project
+# make O=../output BR2_EXTERNAL=../base_external menuconfig
 
 set -e
 
@@ -14,27 +15,21 @@ git submodule update
 echo "Starting Buildroot build..."
 
 # If no config exists → initialize
-if [ ! -f output/.config ]; then
+if [ ! -f buildroot/.config ]; then
     echo "No existing config found."
 
-    if [ -f ${PROJECT_DEFCONFIG} ]; then
-        echo "Using saved project defconfig: ${PROJECT_DEFCONFIG}"
-        make -C buildroot O=${OUTPUT_DIR} \
-            BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} \
-            BR2_DEFCONFIG=${PROJECT_DEFCONFIG_REL_BUILDROOT} \
-            defconfig
+    if [ -f ${PROJECT_MODIFIED_DEFCONFIG} ]; then
+        echo "Using saved project defconfig: ${PROJECT_MODIFIED_DEFCONFIG}"
+	make -C buildroot defconfig BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} BR2_DEFCONFIG=${PROJECT_DEFCONFIG_REL_BUILDROOT}
     else
-        echo "Using default BBB defconfig"
-        make -C buildroot O=${OUTPUT_DIR} \
-            BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} \
-            ${BBB_DEFCONFIG}
+        echo "Using default RPi defconfig"
+	make -C buildroot defconfig BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} BR2_DEFCONFIG=${RPI_DEFAULT_DEFCONFIG}
     fi
 else
     echo "Using existing configuration (output/.config)"
 fi
 
 # Build system
-make -C buildroot O=${OUTPUT_DIR} \
-    BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT}
+make -C buildroot BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT}
 
 echo "Build complete!"

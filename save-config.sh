@@ -10,18 +10,17 @@ echo "Saving Buildroot defconfig..."
 
 mkdir -p ${BR2_EXTERNAL_DIR}/configs
 
-make -C buildroot savedefconfig O=${OUTPUT_DIR} BR2_DEFCONFIG=${PROJECT_DEFCONFIG_REL_BUILDROOT}
+make -C buildroot savedefconfig BR2_DEFCONFIG=${PROJECT_DEFCONFIG_REL_BUILDROOT}
 
-echo "Saved to ${PROJECT_DEFCONFIG}"
+echo "Saved to ${PROJECT_MODIFIED_DEFCONFIG}"
 
 # Save Linux kernel config if custom kernel config is enabled
-if ls ${OUTPUT_DIR}/build/linux-*/.config >/dev/null 2>&1; then
-    if grep -q "BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE" ${OUTPUT_DIR}/.config; then
-        echo "Saving Linux kernel defconfig..."
-        make -C buildroot O=${OUTPUT_DIR} \
-            BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} \
-            linux-update-defconfig
-    fi
+if [ -e buildroot/.config ] && [ ls buildroot/output/build/linux-*/.config 1> /dev/null 2>&1 ]; then
+	grep "BR2_LINUX_KERNEL_CUSTOM_CONFIG_FILE" buildroot/.config > /dev/null
+	if [ $? -eq 0 ]; then
+		echo "Saving linux defconfig"
+		make -C buildroot linux-update-defconfig
+	fi
 fi
 
 echo "Configuration saved successfully!"
