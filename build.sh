@@ -20,13 +20,13 @@ if [ ! -f buildroot/.config ]; then
 
     if [ -f ${PROJECT_MODIFIED_DEFCONFIG} ]; then
         echo "Using saved project defconfig: ${PROJECT_MODIFIED_DEFCONFIG}"
-	make -C buildroot defconfig BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} BR2_DEFCONFIG=${PROJECT_DEFCONFIG_REL_BUILDROOT}
+	make -C buildroot defconfig BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} BR2_DEFCONFIG=${PROJECT_MODIFIED_DEFCONFIG_REL_BUILDROOT}
     else
         echo "Using default RPi defconfig"
 	make -C buildroot defconfig BR2_EXTERNAL=${EXTERNAL_REL_BUILDROOT} BR2_DEFCONFIG=${RPI_DEFAULT_DEFCONFIG}
     fi
 else
-    echo "Using existing configuration (output/.config)"
+    echo "Using existing configuration (buildroot/.config)"
 fi
 
 # Build system

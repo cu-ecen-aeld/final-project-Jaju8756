@@ -8,9 +8,9 @@ source shared.sh
 
 echo "Saving Buildroot defconfig..."
 
-mkdir -p ${BR2_EXTERNAL_DIR}/configs
+mkdir -p ${EXTERNAL_REL_BUILDROOT}/configs/
 
-make -C buildroot savedefconfig BR2_DEFCONFIG=${PROJECT_DEFCONFIG_REL_BUILDROOT}
+make -C buildroot savedefconfig BR2_DEFCONFIG=${PROJECT_MODIFIED_DEFCONFIG_REL_BUILDROOT}
 
 echo "Saved to ${PROJECT_MODIFIED_DEFCONFIG}"
 

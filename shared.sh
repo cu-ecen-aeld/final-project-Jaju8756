@@ -1,13 +1,15 @@
 #!/bin/sh
 # Shared definitions for Buildroot scripts (RPi project)
 
-# External tree
-BR2_EXTERNAL_DIR=base_external
-EXTERNAL_REL_BUILDROOT=../${BR2_EXTERNAL_DIR}
+# External
+EXTERNAL_REL_BUILDROOT=../base_external
 
 # Default RPi defconfig (from Buildroot)
 RPI_DEFAULT_DEFCONFIG=configs/raspberrypi4_64_defconfig
 
 # saved defconfig
-PROJECT_MODIFIED_DEFCONFIG=${BR2_EXTERNAL_DIR}/configs/rpi_defconfig
-PROJECT_DEFCONFIG_REL_BUILDROOT=../${PROJECT_MODIFIED_DEFCONFIG}
+RPI_MODIFIED_DEFCONFIG=base_external/configs/rpi_defconfig
+
+PROJECT_DEFAULT_DEFCONFIG=${RPI_DEFAULT_DEFCONFIG}
+PROJECT_MODIFIED_DEFCONFIG=${RPI_MODIFIED_DEFCONFIG}
+PROJECT_MODIFIED_DEFCONFIG_REL_BUILDROOT=../${PROJECT_MODIFIED_DEFCONFIG}
