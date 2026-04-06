@@ -1,5 +1,5 @@
 menu "Final Project TicTacToe"
 
-#source "$BR2_EXTERNAL_FINALPROJECT_PATH/package/*/Config.in"
+source "$BR2_EXTERNAL_FINALPROJECT_PATH/package/tictactoe-rpi/Config.in"
 
 endmenu

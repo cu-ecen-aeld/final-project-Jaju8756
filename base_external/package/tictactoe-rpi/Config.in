@@ -1,0 +1,4 @@
+config BR2_PACKAGE_TICTACTOE_RPI
+    bool "TicTacToe RPi"
+    help
+      User-space Tic-Tac-Toe application for Raspberry Pi 4.
