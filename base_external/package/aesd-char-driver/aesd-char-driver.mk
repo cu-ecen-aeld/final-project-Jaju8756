@@ -1,0 +1,12 @@
+AESD_CHAR_DRIVER_VERSION = 2384872b36eaf96338caf32a4cd8c1c833d04b08
+AESD_CHAR_DRIVER_SITE = https://github.com/cu-ecen-aeld/assignments-3-and-later-Jaju8756.git
+AESD_CHAR_DRIVER_SITE_METHOD = git
+AESD_CHAR_DRIVER_GIT_SUBMODULES = YES
+
+AESD_CHAR_DRIVER_LICENSE = GPL-2.0
+AESD_CHAR_DRIVER_LICENSE_FILES = LICENSE
+
+AESD_CHAR_DRIVER_MODULE_SUBDIRS = aesd-char-driver
+
+$(eval $(kernel-module))
+$(eval $(generic-package))

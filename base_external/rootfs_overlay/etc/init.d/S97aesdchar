@@ -1,0 +1,35 @@
+#!/bin/sh
+
+case "$1" in
+    start)
+        echo "Loading aesd char driver"
+	modprobe aesdchar
+        major=$(awk "\$2==\"aesdchar\" {print \$1}" /proc/devices)
+        
+	    if [ -z "$major" ]; then
+			echo "Failed to find aesdchar major number"
+			exit 1
+	    fi
+	    
+        rm -f /dev/aesdchar
+        mknod /dev/aesdchar c $major 0
+        chmod 666 /dev/aesdchar
+        echo "aesd char driver loaded"
+        ;;
+        
+    stop)
+    	echo "Unloading aesd char driver"
+    	rm -f /dev/aesdchar
+    	rmmod aesdchar || exit 1
+    	;;
+    	
+    restart)
+        $0 stop
+        $0 start
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit 0
