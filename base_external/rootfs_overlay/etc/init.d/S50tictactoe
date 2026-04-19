@@ -1,0 +1,40 @@
+#!/bin/sh
+
+APP="/usr/bin/tictactoe_app"
+PIDFILE="/var/run/tictactoe.pid"
+
+case "$1" in
+    start)
+        echo "Starting Tic-Tac-Toe application"
+
+        if [ -f "$PIDFILE" ]; then
+            echo "Tic-Tac-Toe already running"
+            exit 0
+        fi
+
+        $APP &
+        echo $! > "$PIDFILE"
+        ;;
+
+    stop)
+        echo "Stopping Tic-Tac-Toe application"
+
+        if [ -f "$PIDFILE" ]; then
+            kill "$(cat "$PIDFILE")" 2>/dev/null
+            rm -f "$PIDFILE"
+        fi
+        ;;
+
+    restart)
+        $0 stop
+        sleep 1
+        $0 start
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+
+exit 0

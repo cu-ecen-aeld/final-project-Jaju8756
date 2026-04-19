@@ -19,4 +19,4 @@ define TICTACTOE_RPI_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/tictactoe-rpi/src/tictactoe_app $(TARGET_DIR)/usr/bin/tictactoe_app
 endef
 
-$(eval $(generic-package))
+$(eval $(generic-package)) 
